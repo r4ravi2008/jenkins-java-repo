@@ -17,15 +17,6 @@ spec:
     command:
     - cat
     tty: true
-  - name: jnlp
-    image: 'jnlp-slave-with-docker:3.26-1_jenkins-2-138-update_3'
-    volumeMounts:
-    - name: docker-volume
-      mountPath: /var/run/docker.sock
-  volumes:
-    - name: docker-volume
-      hostPath:
-        path: /var/run/dind/docker.sock
 """
         }
      }
