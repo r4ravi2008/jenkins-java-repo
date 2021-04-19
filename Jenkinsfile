@@ -40,28 +40,28 @@ spec:
         }
 
     }
-    post {
-        success {
-            echo "Java repo build Success"
-            mail to: "${AUTHOR_EMAIL}",
-                 subject: "Build Success: ${currentBuild.fullDisplayName}",
-                 body: "Build was Successful : ${env.BUILD_URL}"
-        }
-        failure {
-            echo "Java repo build Failure"
-            script {
-                if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release/*') {
-                    emailext (
-                        to: env.SLACK_EMAIL,
-                        subject: "Build failure for branch ${env.BRANCH_NAME}: Needs atention",
-                        body: "Build failure for branch ${env.BRANCH_NAME}. URL ${env.BUILD_URL}",
-                        attachLog: false,
-                        )
-                }
-            }
-            mail to: "${AUTHOR_EMAIL}",
-                    subject: "Failed build: ${currentBuild.fullDisplayName}",
-                    body: "Something is wrong in ${env.BUILD_URL}"
-        }
-    }
+    // post {
+    //     success {
+    //         echo "Java repo build Success"
+    //         mail to: "${AUTHOR_EMAIL}",
+    //              subject: "Build Success: ${currentBuild.fullDisplayName}",
+    //              body: "Build was Successful : ${env.BUILD_URL}"
+    //     }
+    //     failure {
+    //         echo "Java repo build Failure"
+    //         script {
+    //             if (env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'release/*') {
+    //                 emailext (
+    //                     to: env.SLACK_EMAIL,
+    //                     subject: "Build failure for branch ${env.BRANCH_NAME}: Needs atention",
+    //                     body: "Build failure for branch ${env.BRANCH_NAME}. URL ${env.BUILD_URL}",
+    //                     attachLog: false,
+    //                     )
+    //             }
+    //         }
+    //         mail to: "${AUTHOR_EMAIL}",
+    //                 subject: "Failed build: ${currentBuild.fullDisplayName}",
+    //                 body: "Something is wrong in ${env.BUILD_URL}"
+    //     }
+    // }
 }
