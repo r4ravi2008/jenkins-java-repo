@@ -33,7 +33,7 @@ spec:
         AUTHOR_EMAIL = sh(script: "git log --format='%ae' HEAD^!", returnStdout: true).trim()
     }
     options {
-        timestamps()
+        // timestamps()
         buildDiscarder(logRotator(daysToKeepStr: '30', numToKeepStr: '50', artifactDaysToKeepStr: '30', artifactNumToKeepStr: '50'))
     }
     stages {
