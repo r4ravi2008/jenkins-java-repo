@@ -31,14 +31,15 @@ pipeline {
                 always {
                     container ('zap') {
                         sh '''
-                        zap-cli --verbose report -o /zap/reports/owasp-quick-scan-report.html --output-format html
+                        zap-cli --verbose report -o ./reports/owasp-quick-scan-report.html --output-format html
+                        ls -lah
                         '''
                     }
                     publishHTML target: [
                         allowMissing         : false,
                         alwaysLinkToLastBuild: false,
                         keepAll              : true,
-                        reportDir            : '/zap/reports',
+                        reportDir            : 'reports',
                         reportFiles          : 'owasp-quick-scan-report.html',
                         reportName           : 'Zap Scan Report'
                     ]
