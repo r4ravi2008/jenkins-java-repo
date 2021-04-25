@@ -5,7 +5,7 @@ pipeline {
             // Use a dynamic pod name because static labels are known to cause pod creation errors.
             label "maven-pod-${UUID.randomUUID().toString()}"
             defaultContainer "maven"
-            yaml 'pods.yaml'
+            yamlFile 'pods.yaml'
         }
      }
     environment {
