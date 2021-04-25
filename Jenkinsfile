@@ -4,20 +4,8 @@ pipeline {
         kubernetes {
             // Use a dynamic pod name because static labels are known to cause pod creation errors.
             label "maven-pod-${UUID.randomUUID().toString()}"
-            defaultContainer "jnlp"
-            yaml """
-apiVersion: v1
-kind: Pod
-metadata:
-  name: zoltar-batch-offline
-spec:
-  containers:
-  - name: maven
-    image: 'maven:3.5.3-jdk-8'
-    command:
-    - cat
-    tty: true
-"""
+            defaultContainer "maven"
+            yaml 'pods.yaml'
         }
      }
     environment {

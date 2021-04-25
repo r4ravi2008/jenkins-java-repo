@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zap-proxy
+spec:
+  containers:
+  - name: maven
+    image: 'maven:3.5.3-jdk-8'
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - name: shared-build-output
+        mountPath: /var/run/outputs
+  - name: zap
+    image: 'r4ravi2008/zapdocker'
+    volumeMounts:
+      - name: shared-build-output
+        mountPath: /zap/reports/:rw
+    tty: true
+  volumes:
+    - name: shared-build-output
+      emptyDir: {}
