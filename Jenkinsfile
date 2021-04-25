@@ -27,14 +27,29 @@ pipeline {
             }
         }
         stage ('zap-scan') {
+            post {
+                always {
+                    container ('zap') {
+                        sh '''
+                        zap-cli --verbose report -o /zap/reports/owasp-quick-scan-report.html --output-format html
+                        '''
+                    }
+                    publishHTML target: [
+                        allowMissing         : false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll              : true,
+                        reportDir            : 'test/overwatch-test/target/cucumber-html-reports',
+                        reportFiles          : 'overview-features.html',
+                        reportName           : 'Component Functional Test Results'
+                    ]
+                }
+            }
             steps {
                 container('zap') {
                    sh '''
-                       zap-cli --verbose quick-scan http://www.itsecgames.com -l Medium
+                       zap-cli --verbose quick-scan http://www.itsecgames.com
                    '''
-                   sh '''
-                       zap-cli --verbose report -o /zap/reports/owasp-quick-scan-report.html --output-format html
-                   '''
+
                 }
             }
         }
