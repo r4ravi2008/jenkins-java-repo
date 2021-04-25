@@ -18,6 +18,8 @@ spec:
       - name: shared-build-output
         mountPath: /zap/reports/:rw
     tty: true
+    ports:
+       - containerPort: 8080
   volumes:
     - name: shared-build-output
       emptyDir: {}

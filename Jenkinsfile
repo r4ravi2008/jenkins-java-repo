@@ -32,6 +32,9 @@ pipeline {
                    sh '''
                        zap-cli --verbose quick-scan http://www.itsecgames.com -l Medium
                    '''
+                   sh '''
+                       zap-cli --verbose report -o /zap/reports/owasp-quick-scan-report.html --output-format html
+                   '''
                 }
             }
         }
