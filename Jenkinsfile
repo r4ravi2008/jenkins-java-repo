@@ -26,6 +26,15 @@ pipeline {
                 }
             }
         }
+        stage ('zap-scan') {
+            steps {
+                container('zap') {
+                   sh '''
+                       zap-cli --verbose quick-scan http://www.itsecgames.com -l Medium
+                   '''
+                }
+            }
+        }
 
     }
     // post {
