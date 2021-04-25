@@ -1,4 +1,3 @@
-
 pipeline {
     agent {
         kubernetes {
@@ -26,12 +25,17 @@ pipeline {
                 }
             }
         }
+
+        // stage ('deploy') {
+        //    // public url
+        // }
+
         stage ('zap-scan') {
             post {
                 always {
                     container ('zap') {
                         sh '''
-                        zap-cli --verbose report -o ./reports/owasp-quick-scan-report.html --output-format html
+                        zap-cli --verbose report -o ./owasp-quick-scan-report.html --output-format html
                         ls -lah
                         '''
                     }
@@ -39,7 +43,7 @@ pipeline {
                         allowMissing         : false,
                         alwaysLinkToLastBuild: false,
                         keepAll              : true,
-                        reportDir            : 'reports',
+                        reportDir            : './',
                         reportFiles          : 'owasp-quick-scan-report.html',
                         reportName           : 'Zap Scan Report'
                     ]
