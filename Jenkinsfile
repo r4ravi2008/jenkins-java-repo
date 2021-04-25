@@ -38,9 +38,9 @@ pipeline {
                         allowMissing         : false,
                         alwaysLinkToLastBuild: false,
                         keepAll              : true,
-                        reportDir            : 'test/overwatch-test/target/cucumber-html-reports',
-                        reportFiles          : 'overview-features.html',
-                        reportName           : 'Component Functional Test Results'
+                        reportDir            : '/zap/reports',
+                        reportFiles          : 'owasp-quick-scan-report.html',
+                        reportName           : 'Zap Scan Report'
                     ]
                 }
             }
