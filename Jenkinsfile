@@ -51,6 +51,8 @@ pipeline {
             }
             steps {
                 container('zap') {
+                    // Update the target and scan types as per your needs.
+                    // Documentation here: https://www.zaproxy.org/docs/docker/about/
                    sh '''
                        zap-cli --verbose quick-scan http://www.itsecgames.com
                    '''
